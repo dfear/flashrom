@@ -1704,3 +1704,52 @@
 		.read		= SPI_CHIP_READ,
 		.voltage	= {1650, 3600},
 	},
+
+	{
+		.vendor		= "GigaDevice",
+		.name		= "GD25LB64C",
+		.bustype	= BUS_SPI,
+		.manufacture_id	= GIGADEVICE_ID,
+		.model_id	= GIGADEVICE_GD25LB64C,
+		.total_size	= 8192, // NEEDS CHECKING
+		.page_size	= 256, // DONE
+		/* OTP: 1024B total, 256B reserved; read 0x48; write 0x42, erase 0x44 */
+		.feature_bits	= FFEATURE_WRSR_WREN | FEATURE_OTP | FEATURE_WRSR_EXT2, // NEEDS CHECKING (first two OK, third not sure.)
+		.tested		= TEST_UNTESTED, // CHANGE ONCE TESTED
+		.probe		= PROBE_SPI_RDID, // DONE
+		.probe_timing	= TIMING_ZERO, // COULD BE OK
+		.block_erasers	= // WHOLE SECTION NEEDS CHECKING
+		{
+			{
+				.eraseblocks = { {4 * 1024, 2048} },
+				.block_erase = SPI_BLOCK_ERASE_20,
+			}, {
+				.eraseblocks = { {32 * 1024, 256} },
+				.block_erase = SPI_BLOCK_ERASE_52,
+			}, {
+				.eraseblocks = { {64 * 1024, 128} },
+				.block_erase = SPI_BLOCK_ERASE_D8,
+			}, {
+				.eraseblocks = { {8 * 1024 * 1024, 1} },
+				.block_erase = SPI_BLOCK_ERASE_60,
+			}, {
+				.eraseblocks = { {8 * 1024 * 1024, 1} },
+				.block_erase = SPI_BLOCK_ERASE_C7,
+			}
+		},
+		.printlock	= SPI_PRETTYPRINT_STATUS_REGISTER_BP4_SRWD, // NEEDS CHECKING
+		.unlock		= SPI_DISABLE_BLOCKPROTECT_BP4_SRWD, /* TODO: 2nd status reg (read with 0x35) */ // NEEDS CHECKING
+		.write		= SPI_CHIP_WRITE256, // NEEDS CHECKING
+		.read		= SPI_CHIP_READ, /* Fast read (0x0B) and multi I/O supported */ // NEEDS CHECKING
+		.voltage	= {1650, 2000}, // DONE
+		.reg_bits	= // WHOLE SECTION NEEDS CHECKING
+		{
+			.srp    = {STATUS1, 7, RW},
+			.srl    = {STATUS2, 0, RW},
+			.bp     = {{STATUS1, 2, RW}, {STATUS1, 3, RW}, {STATUS1, 4, RW}},
+			.tb     = {STATUS1, 5, RW}, /* Called BP3 in datasheet, acts like TB */
+			.sec    = {STATUS1, 6, RW}, /* Called BP4 in datasheet, acts like SEC */
+			.cmp    = {STATUS2, 6, RW},
+		},
+		.decode_range	= DECODE_RANGE_SPI25, // NEEDS CHECKING
+	},
