@@ -1715,7 +1715,7 @@
 		.page_size	= 256, // DONE
 		/* OTP: 1024B total, 256B reserved; read 0x48; write 0x42, erase 0x44 */
 		.feature_bits	= FEATURE_WRSR_WREN | FEATURE_OTP | FEATURE_QPI, // DONE
-		.tested		= TEST_UNTESTED, // CHANGE ONCE TESTED
+		.tested		= TEST_OK_PREW, // CHANGE ONCE TESTED
 		.probe		= PROBE_SPI_RDID, // DONE
 		.probe_timing	= TIMING_ZERO, // DONE
 		.block_erasers	= //SECTION 3 OF THE DATASHEET MATCHES THE SAME SECTION OF THE DATASHEET OF GIGADEVICE_GD25LQ64
