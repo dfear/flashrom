@@ -1711,13 +1711,13 @@
 		.bustype	= BUS_SPI,
 		.manufacture_id	= GIGADEVICE_ID,
 		.model_id	= GIGADEVICE_GD25LB64C,
-		.total_size	= 8192, // DONE
-		.page_size	= 256, // DONE
+		.total_size	= 8192, 
+		.page_size	= 256, 
 		/* OTP: 1024B total, 256B reserved; read 0x48; write 0x42, erase 0x44 */
-		.feature_bits	= FEATURE_WRSR_WREN | FEATURE_OTP | FEATURE_QPI, // DONE
+		.feature_bits	= FEATURE_WRSR_WREN | FEATURE_OTP | FEATURE_QPI, 
 		.tested		= TEST_OK_PREW, // CHANGE ONCE TESTED
-		.probe		= PROBE_SPI_RDID, // DONE
-		.probe_timing	= TIMING_ZERO, // DONE
+		.probe		= PROBE_SPI_RDID, 
+		.probe_timing	= TIMING_ZERO, 
 		.block_erasers	= //SECTION 3 OF THE DATASHEET MATCHES THE SAME SECTION OF THE DATASHEET OF GIGADEVICE_GD25LQ64
 		{
 			{
@@ -1739,10 +1739,10 @@
 		},
 		.printlock	= SPI_PRETTYPRINT_STATUS_REGISTER_BP4_SRWD, // SAME AS GIGADEVICE_GD25LQ64
 		.unlock		= SPI_DISABLE_BLOCKPROTECT_BP4_SRWD, /* TODO: 2nd status reg (read with 0x35) */ // SAME AS GIGADEVICE_GD25LQ64
-		.write		= SPI_CHIP_WRITE256, // DONE
-		.read		= SPI_CHIP_READ, /* Fast read (0x0B) and multi I/O supported */ // DONE
-		.voltage	= {1650, 2000}, // DONE
-		.reg_bits	= // DONE // SAME AS GIGADEVICE_GD25LQ64
+		.write		= SPI_CHIP_WRITE256, 
+		.read		= SPI_CHIP_READ, /* Fast read (0x0B) and multi I/O supported */ 
+		.voltage	= {1650, 2000}, 
+		.reg_bits	=  // SAME AS GIGADEVICE_GD25LQ64
 		{
 			.srp    = {STATUS1, 7, RW},
 			.srl    = {STATUS2, 0, RW},
@@ -1751,5 +1751,5 @@
 			.sec    = {STATUS1, 6, RW}, /* Called BP4 in datasheet, acts like SEC */
 			.cmp    = {STATUS2, 6, RW},
 		},
-		.decode_range	= DECODE_RANGE_SPI25, // DONE// SAME AS GIGADEVICE_GD25LQ64
+		.decode_range	= DECODE_RANGE_SPI25, // SAME AS GIGADEVICE_GD25LQ64
 	},
